@@ -11,5 +11,5 @@ app.use(express.json()); // Conversión JSON del body
 app.use(cookieParser()); // Ejemplo en la función validateToken
 app.use('/api', authRoutes);
 app.use('/api', tasksRoutes);
-// Prueba
+
 export default app;

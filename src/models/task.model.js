@@ -12,6 +12,7 @@ const taskSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now,
+        required: false
     },
     // ASOCIAMOS LA TAREA A UN USUARIO
     user: {
