@@ -2,6 +2,10 @@ import React from 'react'
 
 export const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <>
+        <p className='text-sky-400/100'>
+          ete
+        </p>
+    </>
   )
 }

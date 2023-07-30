@@ -3,8 +3,14 @@ import bcrypt from 'bcryptjs';
 import { createAccessToken } from '../libs/jwt.js'
 
 export const register = async (req, res) => {
+    const { username, password, email } = req.body;
+
     try {
-        const { username, password, email } = req.body;
+        
+        // Chequeamos que no esté el email ya registrado
+        const userFound = await User.findOne({email});
+
+        if(userFound) return res.status(400).json({ message: 'the email is already registered'})
         
         // Encriptamos la pass
         const passwordHash = await bcrypt.hash(password, 10)
@@ -43,7 +49,11 @@ export const login = async (req, res) => {
         // Creamos un token con el ID del usuario
         const token = await createAccessToken({ id: userFound._id });
 
-        res.cookie("token", token);
+        res.cookie("token", token, {
+            sameSite: 'none', // avisamos que la cookie no está en el mismo dominio
+            secure: true,
+            httpOnly: false // Lo podremos ver en el panel cookie del navegador
+        });
         res.send({ message: "Ingreso correcto "})
         
         
