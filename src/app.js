@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors({
     origin: 'http://localhost:5173',
-    credentials: true
+    credentials: true // Response de cookies.
 }))
 app.use(morgan('dev')); // Para que me de un mensaje por consola
 app.use(express.json()); // Conversión JSON del body
